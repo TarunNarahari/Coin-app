@@ -55,6 +55,12 @@ app.put("/transfer", (req, res) => {
     });
   };
 
+  const{fromId,toId,transferAmount} = req.body;
+  console.log("fromId = " + fromId);
+  console.log("toId = " + toId);
+  console.log("transferAmount = " + transferAmount);
+
+
 
 });
 
