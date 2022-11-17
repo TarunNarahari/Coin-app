@@ -9,8 +9,18 @@ app.use(express.json());
 // parse URL encoded data
 app.use(express.urlencoded({ extended: true }));
 
-app.get("/", (req, res) => {
-  res.json({ message: "Welcome to coin-app application." });
+app.get("/users", (req, res) => {
+  //res.json({ message: "Welcome to coin-app application." });
+  const id = req.query.id;
+
+  User.getAll(id, (err, data) => {
+    if (err)
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving users."
+      });
+    else res.send(data);
+  });
 });
 
 app.post('/new', (req, res) => {
@@ -36,6 +46,7 @@ app.post('/new', (req, res) => {
     });
 
 });
+
 
 
 // create a server
