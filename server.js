@@ -3,11 +3,61 @@ const express = require("express");
 // Initialize express
 const app = express();
 const PORT = 8080;
+const User = require("../app/model.js");
 // parse JSON
 app.use(express.json());
 // parse URL encoded data
+app.use(express.urlencoded({ extended: true }));
+
+app.get("/", (req, res) => {
+  res.json({ message: "Welcome to coin-app application." });
+});
+
+app.post('/new', (req, res) => {
+  // Check if request body is empty
+if (!Object.keys(req.body).length) {
+  return res.status(400).json({
+    message: "Request body cannoty be empty",
+  });
+}
+
+const user = new User({
+  name: req.body.name,
+  balance: 100
+});
+
+User.create(user, (err, data) => {
+  if (err)
+    res.status(500).send({
+      message:
+        err.message || "Some error occurred while creating the User."
+    });
+  else res.send(data);
+  });
+
+});
 
 
+// create a server
+app.listen(PORT, () => {
+console.log(`Server running on port ${PORT}`);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
 const users = [{
     id: 1,
     name: "Jane Doe",
@@ -19,9 +69,7 @@ const users = [{
     age: "31",
    }];
 
-   app.get("/", (req, res) => {
-    res.json({ message: "Welcome to coin-app application." });
-  });
+   
 
 app.post('/create', (req, res) => {
     // Check if request body is empty
@@ -150,10 +198,9 @@ if (!Object.keys(req.body).length) {
  }
  });
 
+*/
 
 
-app.use(express.urlencoded({ extended: true }));
-// create a server
-app.listen(PORT, () => {
-console.log(`Server running on port ${PORT}`);
+
+
 });
