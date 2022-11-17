@@ -2,7 +2,9 @@
 const express = require("express");
 // Initialize express
 const app = express();
-const PORT = 8080;
+
+const PORT = process.env.PORT || 8080;
+
 const User = require("./app/model.js");
 // parse JSON
 app.use(express.json());
@@ -39,7 +41,7 @@ User.create(user, (err, data) => {
 
 
 // create a server
-const PORT = process.env.PORT || 3000;
+
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
 });
