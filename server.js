@@ -3,7 +3,7 @@ const express = require("express");
 // Initialize express
 const app = express();
 const PORT = process.env.PORT || 8080;
-const User = require("/model.js");
+const User = require("app/model.js");
 // parse JSON
 app.use(express.json());
 // parse URL encoded data
