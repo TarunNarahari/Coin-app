@@ -60,6 +60,7 @@ app.put("/transfer", (req, res) => {
   console.log("toId = " + toId);
   console.log("transferAmount = " + transferAmount);
   
+  //gets fromUser info using fromID
   User.getAll(fromId, (err, fromUser) => {
     if (err)
       res.status(500).send({
@@ -67,11 +68,20 @@ app.put("/transfer", (req, res) => {
           err.message || "Some error occurred while retrieving users."
       });
     else {
-      //res.send(data);
-      //let fromUser = data;
-      console.log(fromUser);
     }
     console.log(fromUser);
+  });
+
+  //gets fromUser info using toID
+  User.getAll(toId, (err, toUser) => {
+    if (err)
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving users."
+      });
+    else {
+    }
+    console.log(toUser);
   });
 
   res.status(200).json({
