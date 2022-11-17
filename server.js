@@ -60,7 +60,7 @@ app.put("/transfer", (req, res) => {
   console.log("toId = " + toId);
   console.log("transferAmount = " + transferAmount);
   
-  User.getAll(fromId, (err, data) => {
+  User.getAll(fromId, (err, fromUser) => {
     if (err)
       res.status(500).send({
         message:
@@ -68,10 +68,10 @@ app.put("/transfer", (req, res) => {
       });
     else {
       //res.send(data);
-      let fromUser = data;
+      //let fromUser = data;
       console.log(fromUser);
     }
-  
+    console.log(fromUser);
   });
 
   res.status(200).json({
