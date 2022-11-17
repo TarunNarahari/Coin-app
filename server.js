@@ -59,8 +59,14 @@ app.put("/transfer", (req, res) => {
   console.log("fromId = " + fromId);
   console.log("toId = " + toId);
   console.log("transferAmount = " + transferAmount);
+  
+  let fromUser= User.getAll(fromId);
+  console.log(fromUser);
 
-
+  res.status(200).json({
+    message: "Successful transfer",
+    fromId, toId,
+  });
 
 });
 
