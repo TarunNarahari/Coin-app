@@ -38,6 +38,27 @@ const User = function(user) {
     });
   };
 
+User.update = (id,user,result)=>{
+  sql.query(
+    "UPDATE users SET balance = ? WHERE id = ?",
+    [user.balance, id],
+    (err, res) => {
+      if (err) {
+        console.log("error: ", err);
+        result(null, err);
+        return;
+      }
 
+      if (res.affectedRows == 0) {
+        // not found user with the id
+        result({ kind: "not_found" }, null);
+        return;
+      }
 
-  module.exports = User;
+      console.log("updated tutorial: ", { id: id, ...user });
+      result(null, { id: id, ...user });
+    }
+  );
+}
+
+module.exports = User;

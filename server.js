@@ -23,7 +23,7 @@ app.get("/users", (req, res) => {
   });
 });
 
-app.post('/new', (req, res) => {
+app.post("/new", (req, res) => {
   // Check if request body is empty
   if (!Object.keys(req.body).length) {
     return res.status(400).json({
@@ -46,6 +46,18 @@ app.post('/new', (req, res) => {
     });
 
 });
+
+app.put("/transfer", (req, res) => {
+  // Check if request body is empty
+  if (!Object.keys(req.body).length) {
+    return res.status(400).json({
+      message: "Request body cannoty be empty",
+    });
+  };
+
+
+});
+
 
 
 
