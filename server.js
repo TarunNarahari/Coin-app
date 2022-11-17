@@ -83,6 +83,8 @@ app.put("/transfer", (req, res) => {
     }
     console.log(toUser);
   });
+  console.log(fromUser);
+  console.log(toUser);
 
   //subtract coins from fromUser and transfers to toUser
   fromUser.balance = parseInt(fromUser.balance) - parseInt(transferAmount);
