@@ -19,6 +19,9 @@ const users = [{
     age: "31",
    }];
 
+   app.get("/", (req, res) => {
+    res.json({ message: "Welcome to coin-app application." });
+  });
 
 app.post('/create', (req, res) => {
     // Check if request body is empty
@@ -85,7 +88,7 @@ if (!Object.keys(req.body).length) {
  }
  });
 
- 
+
  app.put('/user/:userID', (req, res) => {
     try {
         const id = parseInt(req.params.userID);
