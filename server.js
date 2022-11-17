@@ -70,10 +70,12 @@ app.put("/transfer", (req, res) => {
     else {
     }
     console.log(fromUser);
+    const fUser = new User(fromUser[0].name,fromUser[0].balance,fromUser[0].id);
+    console.log(fUser.balance);
   });
 
   //gets fromUser info using toID
-  User.getAll(toId, (err, toUser) => {
+  tUser = User.getAll(toId, (err, toUser) => {
     if (err)
       res.status(500).send({
         message:
@@ -81,17 +83,18 @@ app.put("/transfer", (req, res) => {
       });
     else {
     }
-    console.log(toUser);
+    //console.log(toUser.balance);
+    //console.log(new User(tUser));
   });
-  console.log(fromUser);
-  console.log(toUser);
+  
+  
 
   //subtract coins from fromUser and transfers to toUser
-  fromUser.balance = parseInt(fromUser.balance) - parseInt(transferAmount);
-  toUser.balance = parseInt(toUser.balance) + parseInt(transferAmount);
+  //const fbalance = parseInt(fUser.balance) - parseInt(transferAmount);
+  //const tbalance = parseInt(tUser.balance) + parseInt(transferAmount);
 
-  console.log(fromUser.balance);
-  console.log(toUser.balance);
+  //console.log(fbalance);
+  //console.log(tbalance);
 
   res.status(200).json({
     message: "Successful transfer",
