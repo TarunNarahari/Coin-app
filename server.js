@@ -2,9 +2,7 @@
 const express = require("express");
 // Initialize express
 const app = express();
-
 const PORT = process.env.PORT || 8080;
-
 const User = require("./app/model.js");
 // parse JSON
 app.use(express.json());
@@ -17,25 +15,25 @@ app.get("/", (req, res) => {
 
 app.post('/new', (req, res) => {
   // Check if request body is empty
-if (!Object.keys(req.body).length) {
-  return res.status(400).json({
-    message: "Request body cannoty be empty",
-  });
-}
-
-const user = new User({
-  name: req.body.name,
-  balance: 100
-});
-
-User.create(user, (err, data) => {
-  if (err)
-    res.status(500).send({
-      message:
-        err.message || "Some error occurred while creating the User."
+  if (!Object.keys(req.body).length) {
+    return res.status(400).json({
+      message: "Request body cannoty be empty",
     });
-  else res.send(data);
+  };
+
+  const user = new User({
+    name: req.body.name,
+    balance: 100
   });
+
+  User.create(user, (err, data) => {
+    if (err)
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while creating the User."
+      });
+    else res.send(data);
+    });
 
 });
 
@@ -45,7 +43,6 @@ User.create(user, (err, data) => {
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
 });
-
 
 
 
@@ -207,4 +204,3 @@ if (!Object.keys(req.body).length) {
 
 
 
-});
