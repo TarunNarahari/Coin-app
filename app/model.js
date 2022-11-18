@@ -5,7 +5,7 @@ const User = function(user) {
     this.balance = user.balance;
     this.id = user.id;
   };
-
+  // This method creates a new user in the database, assigns id
   User.create = (newUser, result) => {
     sql.query("INSERT INTO users SET ?", newUser, (err, res) => {
       if (err) {
@@ -19,6 +19,7 @@ const User = function(user) {
     });
   };
 
+  // This method gets a user from the database, if an id specified. If it is not, then all users are returned
   User.getAll = (id, result) => {
     let query = "SELECT * FROM users";
   
@@ -37,7 +38,7 @@ const User = function(user) {
       result(null, res);
     });
   };
-
+// This method updates a user's balance if given a valid id
 User.update = (id,balance,result)=>{
   sql.query(
     "UPDATE users SET balance = ? WHERE id = ?",

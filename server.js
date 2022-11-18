@@ -8,11 +8,11 @@ const User = require("./app/model.js");
 app.use(express.json());
 // parse URL encoded data
 app.use(express.urlencoded({ extended: true }));
-
+//This method returns all  the users in database
 app.get("/users", (req, res) => {
-  //res.json({ message: "Welcome to coin-app application." });
+  res.json({ message: "Welcome to coin-app application." });
   const id = req.query.id;
-
+  // calls getAll method getAll method in model.js
   User.getAll(id, (err, data) => {
     if (err)
       res.status(500).send({
@@ -22,7 +22,7 @@ app.get("/users", (req, res) => {
     else res.send(data);
   });
 });
-
+//This method creates  a new user
 app.post("/new", (req, res) => {
   // Check if request body is empty
   if (!Object.keys(req.body).length) {
@@ -30,12 +30,12 @@ app.post("/new", (req, res) => {
       message: "Request body cannoty be empty",
     });
   };
-
+  // Initializes name, balance 
   const user = new User({
     name: req.body.name,
     balance: 100
   });
-
+  //Calls create method in model.js
   User.create(user, (err, data) => {
     if (err)
       res.status(500).send({
@@ -46,7 +46,7 @@ app.post("/new", (req, res) => {
     });
 
 });
-
+// This method transfers coins from one person to another
 app.put("/transfer", (req, res) => {
   // Check if request body is empty
   if (!Object.keys(req.body).length) {
@@ -62,6 +62,7 @@ app.put("/transfer", (req, res) => {
   console.log("transferAmount = " + transferAmount);
 
 
+  //This method calls getAll method in model.js
   User.getAll(fromId, (err, fromUser) => {
       if (err) throw err;
 
@@ -72,7 +73,7 @@ app.put("/transfer", (req, res) => {
       };
 
       const newbalance_fromUser = parseInt(fromUser[0].balance) - parseInt(transferAmount);
-
+      // calls getAll method in the model.js class
       User.getAll(toId, (err, toUser) => {
           if (err) throw err;
 
