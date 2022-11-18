@@ -9,8 +9,11 @@ app.use(express.json());
 // parse URL encoded data
 app.use(express.urlencoded({ extended: true }));
 //This method returns all  the users in database
-app.get("/users", (req, res) => {
+app.get("/", (req,res) => {
   res.json({ message: "Welcome to coin-app application." });
+});
+
+app.get("/users", (req, res) => {
   const id = req.query.id;
   // calls getAll method getAll method in model.js
   User.getAll(id, (err, data) => {
