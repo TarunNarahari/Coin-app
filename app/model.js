@@ -38,10 +38,10 @@ const User = function(user) {
     });
   };
 
-User.update = (id,user,result)=>{
+User.update = (id,balance,result)=>{
   sql.query(
     "UPDATE users SET balance = ? WHERE id = ?",
-    [user.balance, id],
+    [balance, id],
     (err, res) => {
       if (err) {
         console.log("error: ", err);
@@ -55,8 +55,8 @@ User.update = (id,user,result)=>{
         return;
       }
 
-      console.log("updated tutorial: ", { id: id, ...user });
-      result(null, { id: id, ...user });
+      //console.log("updated tutorial: ", { id: id, ...user });
+      result(null, res);
     }
   );
 }
