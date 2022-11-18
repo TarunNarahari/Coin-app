@@ -64,6 +64,11 @@ app.put("/transfer", (req, res) => {
   console.log("toId = " + toId);
   console.log("transferAmount = " + transferAmount);
 
+  if (transferAmount<=0) {
+    return res.status(400).json({
+      message: "Transfer amount can't be 0 or negative",
+    });
+  };
 
   //This method calls getAll method in model.js
   User.getAll(fromId, (err, fromUser) => {
