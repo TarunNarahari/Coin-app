@@ -1,0 +1,210 @@
+
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "This is a simple coin-app NodeJS API project to demonstrate a coin bank",
+        "version": "1.0.0",
+        "title": "Tarun's Coin-App APIs",
+        "contact": {
+            "email": "tarun.narahari@gmail.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        }
+    },
+    "schemes": ["http"],
+    "host": "https://tarun-nodejs-coinapp.herokuapp.com",
+    "basePath": "/",
+    "paths" : {
+        "/users" : {
+            "get" : {
+                "summary" : "Get all the users",
+                "description": "Get all the users",
+                "produces": ["application/json"],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/userResponse"
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Error occurred while retrieving users.",
+                        "schema": {
+                            "$ref": "#/definitions/InvalidResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/new" : {
+            "post" : {
+                "summary" : "Creates new user",
+                "description": "Creates new user with name, id and coin balance of 100",
+                "produces": ["application/json"],
+                "consumes": ["application/json"],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in" : "body",
+                        "description": "name of the user",
+                        "required": true,
+                        "schema": {
+                            "type" : "array",
+                            "items": {
+                                "$ref": "#/definitions/User"
+                            }
+                        }
+
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/userResponse"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Request body cannoty be empty",
+                        "schema": {
+                            "$ref": "#/definitions/InvalidResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Error occurred while creating the User.",
+                        "schema": {
+                            "$ref": "#/definitions/InvalidResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/transfer" : {
+            "put" : {
+                "summary" : "Transfers coins from one user to another",
+                "description": "Subtracts coin from a user and adds to another user",
+                "produces": ["application/json"],
+                "consumes" :["application/json"],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in" : "body",
+                        "description": "body of the transfer",
+                        "required": true,
+                        "schema": {
+                            "type" : "array",
+                            "items": {
+                                "$ref": "#/definitions/transferRequest"
+                            }
+                        }
+
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/transferResponse"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Request body cannoty be empty",
+                        "schema": {
+                            "$ref": "#/definitions/InvalidResponse"
+                        }
+                    },
+                    "401": {
+                        "description": "Transfer amount can't be 0 or negative",
+                        "schema": {
+                            "$ref": "#/definitions/InvalidResponse"
+                        }
+                    },
+                    "402": {
+                        "description": "Not enough coins to transfer",
+                        "schema": {
+                            "$ref": "#/definitions/InvalidResponse"
+                        }
+                    }
+                }
+            }
+        }
+    }, 
+    "definitions": {
+        "userResponse": {
+            "type": "object",
+            "properties": {
+                "id": {
+                     "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "balance": {
+                    "type": "integer"
+                }
+            }
+        },
+        "User": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "InvalidResponse": {
+            "type": "object",
+            "properties": {
+                "message": {
+                    "type": "string"
+                }
+            }
+
+        }
+    },
+    "transferResponse": {
+        "type": "object",
+        "properties": {
+            "fromId": {
+                 "type": "integer"
+            },
+            "toId": {
+                "type": "integer"
+            },
+            "transferAmount": {
+                "type": "integer"
+            },
+            "message" : {
+                "type": "string"
+            }
+        }
+    },
+    "transferRequest": {
+        "type": "object",
+        "properties": {
+            "fromId": {
+                 "type": "integer"
+            },
+            "toId": {
+                "type": "integer"
+            },
+            "transferAmount": {
+                "type": "integer"
+            }
+        }
+    }
+    
+    
+}

@@ -3,6 +3,13 @@ const express = require("express");
 // Initialize express
 const app = express();
 const PORT = process.env.PORT || 8080;
+
+// import library and files
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./swagger.json');
+// let express to use this
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
 const User = require("./app/model.js");
 // parse JSON
 app.use(express.json());
@@ -20,7 +27,7 @@ app.get("/users", (req, res) => {
     if (err)
       res.status(500).send({
         message:
-          err.message || "Some error occurred while retrieving users."
+          err.message || "Error occurred while retrieving users."
       });
     else res.send(data);
   });
@@ -43,7 +50,7 @@ app.post("/new", (req, res) => {
     if (err)
       res.status(500).send({
         message:
-          err.message || "Some error occurred while creating the User."
+          err.message || "Error occurred while creating the User."
       });
     else res.send(data);
     });
@@ -60,12 +67,8 @@ app.put("/transfer", (req, res) => {
 
   const {fromId,toId,transferAmount} = req.body;
 
-  console.log("fromId = " + fromId);
-  console.log("toId = " + toId);
-  console.log("transferAmount = " + transferAmount);
-
   if (transferAmount<=0) {
-    return res.status(400).json({
+    return res.status(401).json({
       message: "Transfer amount can't be 0 or negative",
     });
   };
@@ -75,7 +78,7 @@ app.put("/transfer", (req, res) => {
       if (err) throw err;
 
       if (parseInt(fromUser[0].balance) < parseInt(transferAmount)) {
-        return res.status(400).json({
+        return res.status(402).json({
           message: "Not enough coins to transfer",  
         });
       };
