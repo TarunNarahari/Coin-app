@@ -172,36 +172,36 @@
                 }
             }
 
-        }
-    },
-    "transferResponse": {
-        "type": "object",
-        "properties": {
-            "fromId": {
-                 "type": "integer"
-            },
-            "toId": {
-                "type": "integer"
-            },
-            "transferAmount": {
-                "type": "integer"
-            },
-            "message" : {
-                "type": "string"
+        },
+        "transferResponse": {
+            "type": "object",
+            "properties": {
+                "fromId": {
+                     "type": "integer"
+                },
+                "toId": {
+                    "type": "integer"
+                },
+                "transferAmount": {
+                    "type": "integer"
+                },
+                "message" : {
+                    "type": "string"
+                }
             }
-        }
-    },
-    "transferRequest": {
-        "type": "object",
-        "properties": {
-            "fromId": {
-                 "type": "integer"
-            },
-            "toId": {
-                "type": "integer"
-            },
-            "transferAmount": {
-                "type": "integer"
+        },
+        "transferRequest": {
+            "type": "object",
+            "properties": {
+                "fromId": {
+                     "type": "integer"
+                },
+                "toId": {
+                    "type": "integer"
+                },
+                "transferAmount": {
+                    "type": "integer"
+                }
             }
         }
     }
