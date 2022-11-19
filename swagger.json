@@ -55,7 +55,7 @@
                         "description": "name of the user",
                         "required": true,
                         "schema": {
-                            "type" : "array",
+                            "type" : "object",
                             "items": {
                                 "$ref": "#/definitions/User"
                             }
