@@ -55,10 +55,8 @@
                         "description": "name of the user",
                         "required": true,
                         "schema": {
-                            "type" : "array",
-                            "items": {
-                                "$ref": "#/definitions/User"
-                            }
+                            "type" : "object",
+                            "$ref": "#/definitions/User"
                         }
 
                     }
@@ -101,10 +99,8 @@
                         "description": "body of the transfer",
                         "required": true,
                         "schema": {
-                            "type" : "array",
-                            "items": {
-                                "$ref": "#/definitions/transferRequest"
-                            }
+                            "type" : "object",
+                            "$ref": "#/definitions/transferRequest"
                         }
 
                     }
